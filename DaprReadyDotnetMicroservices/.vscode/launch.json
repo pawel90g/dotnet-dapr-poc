@@ -1,0 +1,86 @@
+{
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "name": ".NET Launch (Api)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build Api",
+            "program": "${workspaceFolder}/Api/bin/Debug/net6.0/Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Api",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": ".NET Launch (UI)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build UI",
+            "program": "${workspaceFolder}/UI/bin/Debug/net6.0/UI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/UI",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": ".NET Launch (Consumer)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build Consumer",
+            "program": "${workspaceFolder}/Consumer/bin/Debug/net6.0/Consumer.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Consumer",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": ".NET in Docker (Api)",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "Run Api Container",
+            "containerName": "daprreadydotnetmicroservices-api",
+            "netCore": {
+                "appProject": "${workspaceFolder}/Api/Api.csproj"
+            }
+        },
+        {
+            "name": ".NET in Docker (UI)",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "Run UI Container",
+            "containerName": "daprreadydotnetmicroservices-ui",
+            "netCore": {
+                "appProject": "${workspaceFolder}/UI/UI.csproj"
+            }
+        },
+        {
+            "name": ".NET in Docker (Consumer)",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "Run Consumer Container",
+            "containerName": "daprreadydotnetmicroservices-consumer",
+            "netCore": {
+                "appProject": "${workspaceFolder}/Consumer/Consumer.csproj"
+            }
+        }
+    ]
+}

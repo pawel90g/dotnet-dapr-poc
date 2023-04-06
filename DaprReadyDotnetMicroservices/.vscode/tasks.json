@@ -1,0 +1,181 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build Api",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Api/Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish Api",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/Api/Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch Api",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/Api/Api.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build UI",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/UI/UI.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish UI",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/UI/UI.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch UI",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/UI/UI.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },{
+            "label": "build Consumer",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Consumer/Consumer.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish Consumer",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/Consumer/Consumer.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch Consumer",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/Consumer/Consumer.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build Api Image",
+            "type": "docker-build",
+            "dockerBuild": {
+                "context": "${workspaceFolder}/Api",
+                "dockerfile": "${workspaceFolder}/Api/Dockerfile",
+                "tag": "api"
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Api/Api.csproj"
+            }
+        },
+        {
+            "label": "Run Api Container",
+            "type": "docker-run",
+            "dockerRun": {
+                "image": "garbacp.azurecr.io/daprreadydotnetmicroservices:api",
+                "containerName": "daprreadydotnetmicroservices-api"
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Api/Api.csproj"
+            }
+        },
+        {
+            "label": "Build UI Image",
+            "type": "docker-build",
+            "dockerBuild": {
+                "context": "${workspaceFolder}/UI",
+                "dockerfile": "${workspaceFolder}/UI/Dockerfile",
+                "tag": "ui"
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/UI/UI.csproj"
+            }
+        },
+        {
+            "label": "Run UI Container",
+            "type": "docker-run",
+            "dockerRun": {
+                "image": "garbacp.azurecr.io/daprreadydotnetmicroservices:ui",
+                "containerName": "daprreadydotnetmicroservices-ui"
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/UI/UI.csproj"
+            }
+        },
+        {
+            "label": "Build Consumer Image",
+            "type": "docker-build",
+            "dockerBuild": {
+                "context": "${workspaceFolder}/Consumer",
+                "dockerfile": "${workspaceFolder}/Consumer/Dockerfile",
+                "tag": "consumer"
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Consumer/Consumer.csproj"
+            }
+        },
+        {
+            "label": "Run Consumer Container",
+            "type": "docker-run",
+            "dockerRun": {
+                "image": "garbacp.azurecr.io/daprreadydotnetmicroservices:consumer",
+                "containerName": "daprreadydotnetmicroservices-ui"
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Consumer/Consumer.csproj"
+            }
+        }
+    ]
+}

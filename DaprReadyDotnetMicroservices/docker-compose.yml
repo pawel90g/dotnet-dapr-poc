@@ -1,0 +1,48 @@
+version: '3.4'
+
+services:
+  ui:
+    image: <docker_registry_image_url>
+    build:
+      context: .
+      dockerfile: UI/Dockerfile
+    ports:
+      - "51000:50001"
+
+  ui-dapr:
+    image: daprio/daprd:latest
+    command: [ "./daprd", "-app-id", "UI", "-app-port", "80" ]
+    depends_on:
+      - ui
+    network_mode: "service:ui"
+
+  api:
+    image: <docker_registry_image_url>
+    build:
+      context: .
+      dockerfile: Api/Dockerfile
+    ports:
+      - "52000:50001"
+
+  api-dapr:
+    image: daprio/daprd:latest
+    command: [ "./daprd", "-app-id", "Api", "-app-port", "80" ]
+    depends_on:
+      - api
+    network_mode: "service:api"
+
+  consumer:
+    image: <docker_registry_image_url>
+    build:
+      context: .
+      dockerfile: Consumer/Dockerfile
+    ports:
+      - "52000:50001"
+
+  consumer-dapr:
+    image: daprio/daprd:latest
+    command: [ "./daprd", "-app-id", "Consumer", "-app-port", "80" ]
+    depends_on:
+      - consumer
+    network_mode: "service:consumer"
+
